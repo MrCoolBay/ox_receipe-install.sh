@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `characters`
           ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE FULLTEXT INDEX IF NOT EXISTS `characters_fullName_index`
+CREATE FULLTEXT INDEX `characters_fullName_index`
   ON `characters` (`fullName`);
 
 CREATE INDEX IF NOT EXISTS `characters_userId_key`
@@ -141,7 +141,7 @@ INSERT INTO `ox_licenses` (`name`, `label`) VALUES
 CREATE TABLE IF NOT EXISTS `character_licenses` (
   `charId` INT UNSIGNED NOT NULL,
   `name` VARCHAR(20) DEFAULT NULL,
-  `data` JSON NOT NULL DEFAULT ((JSON_OBJECT())()),
+  `data` JSON NOT NULL DEFAULT (JSON_OBJECT()),
   UNIQUE KEY `name` (`name`, `charId`),
   KEY `character_licenses_charId_key` (`charId`),
   CONSTRAINT `character_licenses_charId_fk` FOREIGN KEY (`charId`) REFERENCES `characters` (`charId`) ON DELETE CASCADE ON UPDATE CASCADE
