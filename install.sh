@@ -55,11 +55,11 @@ CREATE TABLE IF NOT EXISTS `characters`
           ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-CREATE FULLTEXT INDEX `characters_fullName_index`
-  ON `characters` (`fullName`);
+DROP INDEX IF EXISTS `characters_fullName_index` ON `characters`;
+CREATE FULLTEXT INDEX `characters_fullName_index` ON `characters` (`fullName`);
 
-CREATE INDEX `characters_userId_key`
-  ON `characters` (`userId`);
+DROP INDEX IF EXISTS `characters_userId_key` ON `characters`;
+CREATE INDEX `characters_userId_key` ON `characters` (`userId`);
 
 CREATE TABLE IF NOT EXISTS `character_inventory` (
   `charId` INT UNSIGNED NOT NULL,
@@ -165,8 +165,8 @@ CREATE TABLE IF NOT EXISTS `accounts`
           ON UPDATE SET NULL ON DELETE SET NULL
 );
 
-CREATE FULLTEXT INDEX `accounts_label_index`
-  ON `accounts` (`label`);
+DROP INDEX IF EXISTS `accounts_label_index` ON `accounts`;
+CREATE FULLTEXT INDEX `accounts_label_index` ON `accounts` (`label`);
 
 CREATE TABLE `account_roles` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
@@ -212,7 +212,6 @@ CREATE TABLE IF NOT EXISTS `accounts_access` (
   CONSTRAINT `FK_accounts_access_account_roles` FOREIGN KEY (`role`) REFERENCES `account_roles` (`name`) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
-
 CREATE TABLE IF NOT EXISTS `accounts_transactions` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `actorId` INT UNSIGNED DEFAULT NULL,
@@ -230,8 +229,8 @@ CREATE TABLE IF NOT EXISTS `accounts_transactions` (
   CONSTRAINT `accounts_transactions_toId_fk` FOREIGN KEY (`toId`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE FULLTEXT INDEX `accounts_transactions_message_index`
-  ON `accounts_transactions` (`message`);
+DROP INDEX IF EXISTS `accounts_transactions_message_index` ON `accounts_transactions`;
+CREATE FULLTEXT INDEX `accounts_transactions_message_index` ON `accounts_transactions` (`message`);
 
 CREATE TABLE IF NOT EXISTS `accounts_invoices`
 (
@@ -256,8 +255,8 @@ CREATE TABLE IF NOT EXISTS `accounts_invoices`
         FOREIGN KEY (`actorId`) REFERENCES `characters` (`charId`)
 );
 
-CREATE FULLTEXT INDEX `idx_message_fulltext`
-    ON `accounts_invoices` (`message`);
+DROP INDEX IF EXISTS `idx_message_fulltext` ON `accounts_invoices`;
+CREATE FULLTEXT INDEX `idx_message_fulltext` ON `accounts_invoices` (`message`);
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 
