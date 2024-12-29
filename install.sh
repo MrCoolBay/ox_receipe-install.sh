@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `characters`
 CREATE FULLTEXT INDEX `characters_fullName_index`
   ON `characters` (`fullName`);
 
-CREATE INDEX IF NOT EXISTS `characters_userId_key`
+CREATE INDEX `characters_userId_key`
   ON `characters` (`userId`);
 
 CREATE TABLE IF NOT EXISTS `character_inventory` (
@@ -165,7 +165,7 @@ CREATE TABLE IF NOT EXISTS `accounts`
           ON UPDATE SET NULL ON DELETE SET NULL
 );
 
-CREATE FULLTEXT INDEX IF NOT EXISTS `accounts_label_index`
+CREATE FULLTEXT INDEX `accounts_label_index`
   ON `accounts` (`label`);
 
 CREATE TABLE `account_roles` (
@@ -230,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `accounts_transactions` (
   CONSTRAINT `accounts_transactions_toId_fk` FOREIGN KEY (`toId`) REFERENCES `accounts` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-CREATE FULLTEXT INDEX IF NOT EXISTS `accounts_transactions_message_index`
+CREATE FULLTEXT INDEX `accounts_transactions_message_index`
   ON `accounts_transactions` (`message`);
 
 CREATE TABLE IF NOT EXISTS `accounts_invoices`
@@ -256,7 +256,7 @@ CREATE TABLE IF NOT EXISTS `accounts_invoices`
         FOREIGN KEY (`actorId`) REFERENCES `characters` (`charId`)
 );
 
-CREATE FULLTEXT INDEX IF NOT EXISTS `idx_message_fulltext`
+CREATE FULLTEXT INDEX `idx_message_fulltext`
     ON `accounts_invoices` (`message`);
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
